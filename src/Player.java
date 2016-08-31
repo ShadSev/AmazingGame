@@ -1,11 +1,5 @@
-import com.googlecode.lanterna.input.Key;
-import com.googlecode.lanterna.terminal.Terminal;
 
 
-
-/**
- * Created by Administrator on 2016-08-30.
- */
 public class Player {
     public int x;
     public int y = 25;

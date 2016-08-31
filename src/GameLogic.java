@@ -1,13 +1,9 @@
 import com.googlecode.lanterna.input.Key;
 import com.googlecode.lanterna.terminal.Terminal;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-/**
- * Created by Administrator on 2016-08-30.
- */
+
 public class GameLogic {
     public List<Obstacle> obstacles;
     public int wohooStay=0;
@@ -30,7 +26,6 @@ public class GameLogic {
         }
         counter++;
         return obstacles;
-
     }
 
     public static void movePlayer(Player player, Terminal terminal) throws InterruptedException {
@@ -61,6 +56,7 @@ public class GameLogic {
         }
 
     }
+
     public  boolean checkTextActions (Player player) throws InterruptedException {
 
         if (player.life < 1) {
@@ -77,6 +73,7 @@ public class GameLogic {
         }
         return true;
     }
+
     public String checkCurrentMessage() {
         if (wohooStay != 0) {
             return "Wohoo!";
@@ -105,7 +102,6 @@ public class GameLogic {
         }
     }
 
-
     private void moveObstacle(List<Obstacle> obstacles) {
         this.obstacles = obstacles;
         for (Obstacle obstacle : obstacles) {
@@ -131,7 +127,4 @@ public class GameLogic {
         }
 
     }
-
-
-
 }

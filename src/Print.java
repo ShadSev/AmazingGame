@@ -1,14 +1,8 @@
 import com.googlecode.lanterna.terminal.Terminal;
-
-import java.awt.*;
 import java.util.List;
 
-/**
- * Created by Administrator on 2016-08-31.
- */
 public class Print  {
     Terminal terminal;
-    String currentMessage;
 
     public Print(Terminal terminal) {
         this.terminal = terminal;
