@@ -1,12 +1,14 @@
+import java.awt.*;
+
 /**
  * Created by Administrator on 2016-08-30.
  */
 public class Goodie extends Obstacle {
 
-    public Goodie (int x, char character, String color) {
+    public Goodie (int x, char character) {
         super.x=x;
-        super.y=0;
+        super.y=2;
         super.character=character;
-        super.color=color;
+        super.color= new Color(0x80ff80);
     }
 }
