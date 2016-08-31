@@ -8,7 +8,7 @@ public class GameLogic {
     public List<Obstacle> obstacles;
     public int wohooStay=0;
     public int point=0;
-    public int speed=7;
+    public int speed=8;
     public int counter=0;
     public int messageX;
     public int messageY;
@@ -20,7 +20,7 @@ public class GameLogic {
             addObstacle(obstacles);
             removeObstacleBelow(obstacles);
 
-            if (counter % 90 == 0 && speed > 2) {
+            if (counter % 80 == 0 && speed > 2) {
                 speed--;
             }
         }
@@ -54,7 +54,6 @@ public class GameLogic {
             default:
                 break;
         }
-
     }
 
     public  boolean checkTextActions (Player player) throws InterruptedException {

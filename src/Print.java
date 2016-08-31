@@ -1,11 +1,17 @@
+import com.googlecode.lanterna.TerminalFacade;
 import com.googlecode.lanterna.terminal.Terminal;
+
+import java.nio.charset.Charset;
 import java.util.List;
 
 public class Print  {
-    Terminal terminal;
+Terminal terminal;
+    public Print() {
+        terminal = TerminalFacade.createTerminal(System.in,
+                System.out, Charset.forName("UTF8"));
+        terminal.setCursorVisible(false);
+        terminal.enterPrivateMode();
 
-    public Print(Terminal terminal) {
-        this.terminal = terminal;
     }
     public void printAll(Player player, List<Obstacle> obstacles) {
         terminal.clearScreen();
@@ -47,10 +53,9 @@ public class Print  {
     private void printString (String text, int y, int x)  {
         int counter = 0;
         while (counter < text.length()) {
-            terminal.applyForegroundColor(70, 140, 160);
             terminal.moveCursor(x++, y);
             terminal.putCharacter(text.charAt(counter++));
-            terminal.applyForegroundColor(235, 235, 235);
+//            terminal.applyForegroundColor(255, 255, 255);
         }
     }
 
