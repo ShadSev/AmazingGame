@@ -8,13 +8,20 @@ import java.util.List;
  */
 public class Print  {
     Terminal terminal;
+    String currentMessage;
 
     public Print(Terminal terminal) {
         this.terminal = terminal;
     }
+    public void printAll(Player player, List<Obstacle> obstacles) {
+        terminal.clearScreen();
+        printPlayerStats(player);
+        printObstacles(obstacles);
+        printBorder();
+        printPlayer(player);
+    }
 
-
-    public void printObstacles(List<Obstacle> obstacles) {
+    private void printObstacles(List<Obstacle> obstacles) {
 
         for (Obstacle obstacle: obstacles) {
            terminal.applyForegroundColor(obstacle.color.getRed(), obstacle.color.getGreen(), obstacle.color.getBlue());
@@ -26,7 +33,7 @@ public class Print  {
 
     public void printPlayer(Player player) {
         terminal.moveCursor(player.x, player.y);
-        terminal.putCharacter('M');
+        terminal.putCharacter('۩');
     }
 
 
@@ -34,18 +41,16 @@ public class Print  {
         printString( "Game Over!",  10, 10);
         return -1;
     }
-    public void printWohoo()  {
-        printString("Wohoo!", 10, 10);
-    }
-    public void printPlayerStats(Player player ) {
+
+    private void printPlayerStats(Player player ) {
         printString( "Antal Poäng: " + player.points + "\nAntal Liv: " + player.life, 0, 0);
     }
-    public void printCurrentMessage(String text) {
+    public void printCurrentMessage(String text, int x, int y) {
         if (text != null) {
-            printString(text, 10, 10);
+            printString(text, y, x);
         }
     }
-    public void printString (String text, int y, int x)  {
+    private void printString (String text, int y, int x)  {
         int counter = 0;
         while (counter < text.length()) {
             terminal.applyForegroundColor(70, 140, 160);
@@ -55,7 +60,7 @@ public class Print  {
         }
     }
 
-    public void printBorder(){
+    private void printBorder(){
         for (int x = 0; x <= 35; x++) {
             for (int y = 1; y <= 35; y++) {
                 if(x == 0 || x == 35){
@@ -69,6 +74,4 @@ public class Print  {
             }
         }
    }
-
-
 }

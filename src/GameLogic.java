@@ -11,14 +11,26 @@ import java.util.Random;
 public class GameLogic {
     public List<Obstacle> obstacles;
     public int wohooStay=0;
-    public  int point=0;
+    public int point=0;
+    public int speed=7;
+    public int counter=0;
+    public int messageX;
+    public int messageY;
 
 
     public List<Obstacle> run(List<Obstacle> obstacles) {
-        moveObstacle(obstacles);
-        addObstacle(obstacles);
-        removeObstacleBelow(obstacles);
+        if (counter % speed == 0) {
+            moveObstacle(obstacles);
+            addObstacle(obstacles);
+            removeObstacleBelow(obstacles);
+
+            if (counter % 90 == 0 && speed > 2) {
+                speed--;
+            }
+        }
+        counter++;
         return obstacles;
+
     }
 
     public static void movePlayer(Player player, Terminal terminal) throws InterruptedException {
@@ -49,40 +61,43 @@ public class GameLogic {
         }
 
     }
-    public  int checkTextActions (Player player, int counter) throws InterruptedException {
+    public  boolean checkTextActions (Player player) throws InterruptedException {
 
         if (player.life < 1) {
-            return -1;
+            return false;
         }
         if (player.points > point) {
             wohooStay=10;
             point = player.points;
+            messageX = player.x;
+            messageY = player.y;
         }
         if(wohooStay>0){
             wohooStay--;
         }
-        return counter;
+        return true;
     }
-    public String checkCurrentMessage(){
-        if (wohooStay!=0){
+    public String checkCurrentMessage() {
+        if (wohooStay != 0) {
             return "Wohoo!";
         }
         return null;
     }
 
     public static void detectCollision(List<Obstacle> obstacles, Player player) throws InterruptedException {
-        char test='j';
+        char test;
         for (Obstacle obstacle : obstacles) {
             if (obstacle.x == player.x && obstacle.y == player.y) {
                 test = obstacle.character;
                 if (test == 'X') {
                     obstacle.character='8';
                     player.life-=1;
+                    obstacle.setColor(0xbfbfbf);
                 } else if (test == '\u263a') {
                     player.points += 1;
                     obstacle.character='\u263b';
-                    obstacle.color.darker().darker().darker();
-                    if(player.points%9==0){
+                    obstacle.setColor(0xe6ecff);
+                    if(player.points%4==0){
                         player.life++;
                     }
                 }
